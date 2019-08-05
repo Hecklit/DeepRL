@@ -160,7 +160,10 @@ class Task:
                  seed=np.random.randint(int(1e5))):
         if log_dir is not None:
             mkdir(log_dir)
-        envs = [make_env(name, seed, i, episode_life) for i in range(num_envs)]
+        if callable(name):
+            envs = [name for _ in range(num_envs)]
+        else:
+            envs = [make_env(name, seed, i, episode_life) for i in range(num_envs)]
         if single_process:
             Wrapper = DummyVecEnv
         else:

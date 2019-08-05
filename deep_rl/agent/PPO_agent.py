@@ -27,7 +27,7 @@ class PPOAgent(BaseAgent):
         for _ in range(config.rollout_length):
             prediction = self.network(states)
             next_states, rewards, terminals, info = self.task.step(to_np(prediction['a']))
-            self.record_online_return(info)
+            # self.record_online_return(info)
             rewards = config.reward_normalizer(rewards)
             next_states = config.state_normalizer(next_states)
             storage.add(prediction)
